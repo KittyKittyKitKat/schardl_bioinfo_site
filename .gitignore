@@ -1,0 +1,4 @@
+__pycache__/
+.mypy_cache/
+bulma-0.9.4.zip
+.vscode/
