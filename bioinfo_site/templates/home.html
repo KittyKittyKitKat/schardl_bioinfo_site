@@ -1,8 +1,33 @@
 {% extends "layout.html" %}
 {% block content %}
-  Future Home Page
-<br>
-  Dr. Schardl requested some scrolling images to go here
-<br>
-  Brief blurb about the project, specifics get their own page.
+  <section id="home-carousel-section" class="hero is-medium has-carousel is-halfheight">
+    <div id="home-carousel" class="hero-carousel">
+      {% for image_file, ratio in images %}
+      <div class="item-{{ loop.index }}">
+        <figure class="image {{ ratio }}">
+          <img src="{{ image_file }}" alt="">
+        </figure>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="hero-head"></div>
+    <div class="hero-body"></div>
+    <div class="hero-foot"></div>
+  </section>
+  <!-- End Hero Carousel -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/js/bulma-carousel.min.js"></script>
+  <script>
+    const c = bulmaCarousel.attach('#home-carousel', {
+      loop: true,
+      infnite: true,
+      autoplay: true,
+    })[0];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      let h = document.querySelector('#home-carousel-section');
+      console.log(h);
+      h.addEventListener('click', () => {console.log('here')});
+    });
+  </script>
 {% endblock content %}
