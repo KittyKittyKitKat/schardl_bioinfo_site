@@ -1,0 +1,146 @@
+[
+    {
+        "long_name": "Dr. Christopher L. Schardl",
+        "short_name": "Dr. Schardl",
+        "image_name": "schardl.jpeg",
+        "link": "",
+        "info": {
+            "Institutional Affiliation": "University of Kentucky, Department of Plant Pathology",
+            "Role in Institution": "Professor of Plant Mycology",
+            "Contributions to Project": "Project Leader",
+            "Hobby Outside of Research": "Hiking, Whitewater Kayaking & Rafting"
+        }
+    },
+    {
+        "long_name": "Dr. Pat Calie",
+        "short_name": "Dr. Calie",
+        "image_name": "",
+        "link": "",
+        "info": {
+            "Institutional Affiliation": "",
+            "Role in Institution": "",
+            "Contributions to Project": "",
+            "Hobby Outside of Research": ""
+        }
+    },
+    {
+        "long_name": "Dr. Jerzy W. Jaromczyk",
+        "short_name": "Dr. Jaromczyk",
+        "image_name": "",
+        "link": "",
+        "info": {
+            "Institutional Affiliation": "University of Kentucky",
+            "Role in Institution": "Faculty in the Department of Computer Science",
+            "Contributions to Project": "",
+            "Hobby Outside of Research": ""
+        }
+    },
+    {
+        "long_name": "Dr. Neil Moore",
+        "short_name": "Dr. Moore",
+        "image_name": "",
+        "link": "",
+        "info": {
+            "Institutional Affiliation": "",
+            "Role in Institution": "",
+            "Contributions to Project": "",
+            "Hobby Outside of Research": ""
+        }
+    },
+    {
+        "long_name": "Padmaja Nagabhyru",
+        "short_name": "P. Nagabhyru",
+        "image_name": "",
+        "link": "",
+        "info": {
+            "Institutional Affiliation": "",
+            "Role in Institution": "",
+            "Contributions to Project": "",
+            "Hobby Outside of Research": ""
+        }
+    },
+    {
+        "long_name": "Simona Florea",
+        "short_name": "S. Florea",
+        "image_name": "",
+        "link": "",
+        "info": {
+            "Institutional Affiliation": "",
+            "Role in Institution": "",
+            "Contributions to Project": "",
+            "Hobby Outside of Research": ""
+        }
+    },
+    {
+        "long_name": "R. Louis Hirsch",
+        "short_name": "R. L. Hirsch",
+        "image_name": "",
+        "link": "",
+        "info": {
+            "Institutional Affiliation": "",
+            "Role in Institution": "",
+            "Contributions to Project": "",
+            "Hobby Outside of Research": ""
+        }
+    },
+    {
+        "long_name": "Andrew Tapia",
+        "short_name": "A. Tapia",
+        "image_name": "",
+        "link": "https://www.cs.uky.edu/~acta225/",
+        "info": {
+            "Institutional Affiliation": "University of Kentucky, Department of Computer Science",
+            "Role in Institution": "PhD student, research assistant",
+            "Contributions to Project": "Data wrangling, software development",
+            "Hobby Outside of Research": "Programming, violin, piano"
+        }
+    },
+    {
+        "long_name": "Rachel Sneed",
+        "short_name": "R. Sneed",
+        "image_name": "sneed.jpg",
+        "link": "",
+        "info": {
+            "Institutional Affiliation": "University of Kentucky, Department of Plant Pathology",
+            "Role in Institution": "M.S. student",
+            "Contributions to Project": "Chemotyping of B. erectum samples",
+            "Hobby Outside of Research": "Hiking, Crafting, Dog Parks with my Australian Shepherd Maple"
+        }
+    },
+    {
+        "long_name": "Tharanie Subramaniam",
+        "short_name": "T. Subramaniam",
+        "image_name": "",
+        "link": "",
+        "info": {
+            "Institutional Affiliation": "University of Kentucky, Department of Electrical and Computer Engineering, and Department of Computer Science",
+            "Role in Institution": "Computer Science and Computer Engineering undergraduate student",
+            "Contributions to Project": "Website development",
+            "Hobby Outside of Research": "Violin, singing, and hiking"
+        }
+    },
+    {
+        "long_name": "Nyx Harris-Palmer",
+        "short_name": "N. Harris-Palmer",
+        "image_name": "",
+        "link": "",
+        "info": {
+            "Institutional Affiliation": "",
+            "Role in Institution": "",
+            "Contributions to Project": "",
+            "Hobby Outside of Research": ""
+        }
+    },
+    {
+        "long_name": "Nick Koenig",
+        "short_name": "N. Koenig",
+        "image_name": "",
+        "link": "",
+        "info": {
+            "Institutional Affiliation": "University of Idaho",
+            "Role in Institution": "Geography PhD Student in the Earth & Spatial Sciences Department",
+            "Contributions to Project": "Website Building & Plant Identification",
+            "Hobby Outside of Research": "Botanizing, knitting, and printmaking"
+        }
+    }
+]

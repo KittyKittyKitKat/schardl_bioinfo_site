@@ -1,5 +1,6 @@
 from pathlib import Path
 from flask import render_template, Blueprint, url_for
+import json
 
 routes = Blueprint('routes', __name__)
 
@@ -20,7 +21,9 @@ def project_details():
 
 @routes.route('/biographies')
 def biographies():
-    return render_template('biographies.html', title='Biographies')
+    with open(Path(__name__.split('.')[0]) / 'static' / 'biographies.json') as fp:
+        bios = json.load(fp)
+    return render_template('biographies.html', title='Biographies', bios=bios)
 
 
 @routes.route('/map')

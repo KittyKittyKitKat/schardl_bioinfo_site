@@ -1,15 +1,14 @@
 {% extends "layout.html" %}
 {% block content %}
-
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-2">
-      <nav id="name-sidebar" class="nav nav-pills flex-column mt-3">
-        <!-- IMPORTANT: Remember to add spy links -->
-        <a class="nav-link" href="#card-0">Dr. Schardl</a>
+      <nav id="name-sidebar" class="nav nav-pills flex-column mt-3 d-none d-sm-block">
+        {% for person in bios %}
+        <a class="nav-link" href="#card-{{ loop.index0 }}">{{ person['short_name'] }}</a>
+        {% endfor %}
       </nav>
     </div>
-    <!-- Picture placeholder: https://bulma.io/images/placeholders/128x128.png -->
     <div class="col-sm-10">
       <div
         id="bios"
@@ -19,70 +18,46 @@
         data-bs-smooth-scroll="true"
         tabindex="0"
       >
-      <!-- TODO: Consider auto generating these with Jinja -->
-      <!-- Bio Begin -->
-      <div id="card-0" class="card p-3 m-3">
+      {% for person in bios %}
+      <div id="card-{{ loop.index0 }}" class="card p-3 m-3">
         <div class="d-flex flex-row align-items-center">
           <img
             class="card-img-top avatar avatar-128 rounded-circle ms-4"
-            src="{{ url_for('static', filename='images/bios/schardl_bio.jpeg')}}"
-            alt="Dr. Schardl"
+            src="{{ url_for('static', filename='images/bios/'+person['image_name']) if person['image_name'] else 'https://bulma.io/images/placeholders/128x128.png' }}"
+            alt="{{ person['short_name'] }}"
           >
-          <h5 class="card-title ms-4">Dr. Christopher L. Schardl</h5>
+          <h5 class="card-title ms-4">{{ person['long_name'] }}</h5>
         </div>
         <div class="card-body">
           <ul class="list-group">
+            {% for key, value in person['info'].items() %}
             <li class="list-group-item">
               <div class="fw-bold">
-                Institutional Affiliation
+                {{ key }}
               </div>
-              University of Kentucky, Department of Plant Pathology
+              {{ value }}
             </li>
-            <li class="list-group-item">
-              <div class="fw-bold">
-                Role in Institution
-              </div>
-              Professor of Plant Mycology
-            </li>
-            <li class="list-group-item">
-              <div class="fw-bold">
-                Contributions to Project
-              </div>
-              Project Leader
-            </li>
-            <li class="list-group-item">
-              <div class="fw-bold">
-                Hobby Outside of Research
-              </div>
-              Hiking, Whitewater Kayaking & Rafting
-            </li>
+            {% endfor %}
           </ul>
-          <a href="#card-0" class="btn btn-sm btn-secondary mt-3">
+          <a
+            href="{{ person['link'] if person['link'] else '#card-'+loop.index0|string }}"
+            class="btn btn-sm btn-secondary mt-3"
+            target="{{ '_blank' if person['link'] else '' }}"
+          >
             Personal Site
           </a>
         </div>
       </div>
-      <!-- Bio End -->
-
+      {% endfor %}
     </div>
   </div>
 </div>
 <script>
-  /* Sets the height of the div#bios to be something reasonable
-   * for the scroll spy to work properly
-   */
   function set_card_region_height() {
       let window_height = window.innerHeight;
       let nav_height = document.querySelector('#site-navbar').offsetHeight;
-      let card_height = document.querySelector('#card-0').offsetHeight;
-      let num_cards = Math.max(
-          1,
-          Math.trunc((window_height - nav_height) / card_height)
-      );
       document.querySelector("#bios").style.height = (
-          Math.ceil(
-              (num_cards * card_height) / 100
-          ) * 100
+        window_height-nav_height-15
       ) + 'px';
   }
   set_card_region_height();
