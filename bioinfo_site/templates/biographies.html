@@ -1,20 +1,91 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="card w-50 p-3 m-3">
-  <img
-    class="card-img-top avatar avatar-128 rounded-circle"
-    src="{{ url_for('static', filename='images/bios/schardl_bio.jpeg')}}"
-    alt="Dr. Schardl"
-  >
-  <div class="card-body">
-    <h5 class="card-title">Dr. Christopher L. Schardl</h5>
-    <p class="card-text">
-      Institutional Affiliation: University of Kentucky, Department of Plant Pathology<br>
-      Role in Institution: Professor of Plant Mycology<br>
-      Contributions to Project: Project Leader<br>
-      Hobby Outside of Research: Hiking, Whitewater Kayaking & Rafting
-    </p>
-    <a href="#" class="btn btn-secondary">Personal Site</a>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-2">
+      <nav id="name-sidebar" class="nav nav-pills flex-column mt-3">
+        <!-- IMPORTANT: Remember to add spy links -->
+        <a class="nav-link" href="#card-0">Dr. Schardl</a>
+      </nav>
+    </div>
+    <!-- Picture placeholder: https://bulma.io/images/placeholders/128x128.png -->
+    <div class="col-sm-10">
+      <div
+        id="bios"
+        class="overflow-auto"
+        data-bs-spy="scroll"
+        data-bs-target="#name-sidebar"
+        data-bs-smooth-scroll="true"
+        tabindex="0"
+      >
+      <!-- TODO: Consider auto generating these with Jinja -->
+      <!-- Bio Begin -->
+      <div id="card-0" class="card p-3 m-3">
+        <div class="d-flex flex-row align-items-center">
+          <img
+            class="card-img-top avatar avatar-128 rounded-circle ms-4"
+            src="{{ url_for('static', filename='images/bios/schardl_bio.jpeg')}}"
+            alt="Dr. Schardl"
+          >
+          <h5 class="card-title ms-4">Dr. Christopher L. Schardl</h5>
+        </div>
+        <div class="card-body">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <div class="fw-bold">
+                Institutional Affiliation
+              </div>
+              University of Kentucky, Department of Plant Pathology
+            </li>
+            <li class="list-group-item">
+              <div class="fw-bold">
+                Role in Institution
+              </div>
+              Professor of Plant Mycology
+            </li>
+            <li class="list-group-item">
+              <div class="fw-bold">
+                Contributions to Project
+              </div>
+              Project Leader
+            </li>
+            <li class="list-group-item">
+              <div class="fw-bold">
+                Hobby Outside of Research
+              </div>
+              Hiking, Whitewater Kayaking & Rafting
+            </li>
+          </ul>
+          <a href="#card-0" class="btn btn-sm btn-secondary mt-3">
+            Personal Site
+          </a>
+        </div>
+      </div>
+      <!-- Bio End -->
+
+    </div>
   </div>
 </div>
+<script>
+  /* Sets the height of the div#bios to be something reasonable
+   * for the scroll spy to work properly
+   */
+  function set_card_region_height() {
+      let window_height = window.innerHeight;
+      let nav_height = document.querySelector('#site-navbar').offsetHeight;
+      let card_height = document.querySelector('#card-0').offsetHeight;
+      let num_cards = Math.max(
+          1,
+          Math.trunc((window_height - nav_height) / card_height)
+      );
+      document.querySelector("#bios").style.height = (
+          Math.ceil(
+              (num_cards * card_height) / 100
+          ) * 100
+      ) + 'px';
+  }
+  set_card_region_height();
+  window.addEventListener('resize', set_card_region_height);
+</script>
 {% endblock content %}
