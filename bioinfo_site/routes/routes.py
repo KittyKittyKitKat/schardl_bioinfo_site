@@ -1,14 +1,19 @@
-from pathlib import Path
-from flask import render_template, Blueprint, url_for
+# Copyright (c) 2023 Nyx Harris-Palmer, Tharanie Subramaniam
 import json
+from pathlib import Path
+
+from flask import Blueprint, render_template, url_for
 
 routes = Blueprint('routes', __name__)
+
 
 @routes.route('/')
 @routes.route('/home')
 def home():
     slideshow_images = []
-    slideshow_images_path = Path(__name__.split('.')[0]) / 'static' / 'images' / 'slideshow'
+    slideshow_images_path = (
+        Path(__name__.split('.')[0]) / 'static' / 'images' / 'slideshow'
+    )
     for image_file in slideshow_images_path.glob('*'):
         slideshow_images.append(str(Path(*image_file.parts[1:])))
     return render_template('home.html', title='Home', images=slideshow_images)

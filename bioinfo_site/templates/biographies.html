@@ -1,3 +1,4 @@
+{# Copyright (c) 2023 Nyx Harris-Palmer, Tharanie Subramaniam #}
 {% extends "layout.html" %}
 {% block content %}
 <div class="container-fluid">
@@ -40,7 +41,7 @@
             {% endfor %}
           </ul>
           <a
-            href="{{ person['link'] if person['link'] else '#card-'+loop.index0|string }}"
+            href="{{ person['link'] if person['link'] else '#card-'~loop.index0 }}"
             class="btn btn-sm btn-secondary mt-3"
             target="{{ '_blank' if person['link'] else '' }}"
           >

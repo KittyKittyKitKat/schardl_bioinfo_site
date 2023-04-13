@@ -1,3 +1,4 @@
+{# Copyright (c) 2023 Nyx Harris-Palmer, Tharanie Subramaniam #}
 {% extends "layout.html" %}
 {% block content %}
 <div class="container">
@@ -11,14 +12,14 @@
             data-bs-target="#home-slideshow"
             data-bs-slide-to="{{ loop.index0 }}"
             aria-label="Slide {{ loop.index }}"
-            class="{{ '' if loop.index0 else 'active'}}"
-            aria-current="{{ 'false' if loop.index0 else 'true'}}" >
+            class="{{ 'active' if loop.first else ''}}"
+            aria-current="{{ 'true' if loop.first else 'false'}}" >
           </button>
           {% endfor %}
         </div>
         <div class="carousel-inner">
           {% for image in images %}
-          <div class="carousel-item {{ '' if loop.index0 else 'active' }} bg-dark">
+          <div class="carousel-item {{ 'active' if loop.first else '' }} bg-dark">
             <div class="d-flex justify-content-center">
               <button
                 class="btn btn-link"
