@@ -40,13 +40,15 @@
             </li>
             {% endfor %}
           </ul>
+          {% if person['link'] %}
           <a
-            href="{{ person['link'] if person['link'] else '#card-'~loop.index0 }}"
+            href="{{ person['link'] }}"
             class="btn btn-sm btn-secondary mt-3"
-            target="{{ '_blank' if person['link'] else '' }}"
+            target="_blank"
           >
             Personal Site
           </a>
+          {% endif %}
         </div>
       </div>
       {% endfor %}
