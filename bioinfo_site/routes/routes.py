@@ -1,4 +1,5 @@
 # Copyright (c) 2023 Nyx Harris-Palmer, Tharanie Subramaniam
+import csv
 import json
 from pathlib import Path
 
@@ -33,7 +34,17 @@ def biographies():
 
 @routes.route('/map')
 def map():
-    return render_template('map.html', title='Map')
+    with open(Path(__name__.split('.')[0]) / 'static' / 'collection_sites.csv', newline='') as fp:
+        reader = csv.DictReader(fp)
+        fieldnames = reader.fieldnames
+        markers = []
+        for row in reader:
+            new_row = {
+                key: value if key not in ('Latitude', 'Longitude') else float(value)
+                for key, value in row.items()
+            }
+            markers.append(new_row)
+    return render_template('map.html', title='Map', markers=markers, fieldnames=fieldnames)
 
 
 @routes.route('/gbrowse')

@@ -1,7 +1,131 @@
 {# Copyright (c) 2023 Nyx Harris-Palmer, Tharanie Subramaniam #}
 {% extends "layout.html" %}
+{% block extra_head %}
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+  crossorigin=""
+/>
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+  crossorigin="">
+</script>
+<style>
+  #map {
+    height: 400px;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 5px;
+  }
+</style>
+{% endblock extra_head %}
 {% block content %}
-Future Map Page
-<br>
-I know we had a prototype for this in the works that Simona showed off.
+<div class="container-fluid">
+ <div class="row">
+    <div class="col-5">
+      <div id="marker-table" class="table-responsive">
+        <table class="table table-sm table-bordered caption-top table-hover">
+          <caption>List of collection sites</caption>
+          <thead>
+            <tr>
+              {% for fieldname in fieldnames %}
+              <th scope="col">{{ fieldname }}</th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+          {% for row in markers %}
+            <tr>
+            {% for key, value in row.items() %}
+              <td>{{value}}</td>
+            {% endfor %}
+            <td>
+              <button
+                type="button"
+                class="btn btn-secondary btn-sm"
+                onclick="viewMapMarker({{ row['Latitude'] }}, {{ row['Longitude'] }})"
+              >
+                View on map
+              </button>
+            </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="col-7">
+      <div id="map"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function set_map_table_height() {
+      let window_height = window.innerHeight;
+      let nav_height = document.querySelector('#site-navbar').offsetHeight;
+      document.querySelector("#map").style.height = (
+        window_height-nav_height-15
+      ) + 'px';
+      document.querySelector("#marker-table").style.height = (
+        window_height-nav_height-15
+      ) + 'px';
+  }
+  set_map_table_height();
+  window.addEventListener('resize', set_map_table_height);
+
+  let map = L.map('map', {
+    "center": [38.047989, -84.501640],
+    "zoom": 8,
+  });
+
+  let Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+  });
+
+  let Esri_WorldTopoMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
+  });
+
+  let Esri_WorldStreetMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+  });
+
+  let layerControl = L.control.layers(
+    {
+      "Satellite": Esri_WorldImagery,
+      "Topography": Esri_WorldTopoMap,
+      "Streets": Esri_WorldStreetMap,
+    },
+  ).addTo(map);
+
+  Esri_WorldImagery.addTo(map);
+
+  let markers = {{ markers|tojson }} // Array of Objects
+
+  let markers_arr = [];
+  markers.forEach(function (item, index) {
+    let marker = L.marker([item.Latitude, item.Longitude]).addTo(map);
+    marker.bindPopup(
+      `${item.Site} (${item.Abbreviation})<br>${item.County} County, ${item.State}<br>(${item.Latitude}, ${item.Longitude})`
+    );
+    marker.on('click', () => map.flyTo(marker.getLatLng(), 10));
+    markers_arr.push(marker);
+  });
+
+  function viewMapMarker(lat, long) {
+    let ll = L.latLng(lat, long)
+    map.closePopup();
+    map.flyTo(ll, 10);
+    for (let i in markers_arr) {
+      if (markers_arr[i].getLatLng().equals(ll)) {
+        markers_arr[i].openPopup();
+        return;
+      }
+    }
+  }
+</script>
 {% endblock content %}
