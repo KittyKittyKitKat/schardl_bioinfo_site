@@ -32,8 +32,8 @@ def biographies():
     return render_template('biographies.html', title='Biographies', bios=bios)
 
 
-@routes.route('/map')
-def map():
+@routes.route('/collection-sites')
+def collection_sites():
     with open(Path(__name__.split('.')[0]) / 'static' / 'collection_sites.csv', newline='') as fp:
         reader = csv.DictReader(fp)
         fieldnames = reader.fieldnames
@@ -44,7 +44,7 @@ def map():
                 for key, value in row.items()
             }
             markers.append(new_row)
-    return render_template('map.html', title='Map', markers=markers, fieldnames=fieldnames)
+    return render_template('map.html', title='Collection Sites', markers=markers, fieldnames=fieldnames)
 
 
 @routes.route('/gbrowse')

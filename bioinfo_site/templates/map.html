@@ -24,14 +24,14 @@
 {% block content %}
 <div class="container-fluid">
  <div class="row">
-    <div class="col-5">
+    <div class="col-6">
       <div id="marker-table" class="table-responsive">
-        <table class="table table-sm table-bordered caption-top table-hover">
+        <table class="table table-bordered caption-top table-hover">
           <caption>List of collection sites</caption>
           <thead>
             <tr>
               {% for fieldname in fieldnames %}
-              <th scope="col">{{ fieldname }}</th>
+              <th scope="col" class="text-center">{{ fieldname }}</th>
               {% endfor %}
             </tr>
           </thead>
@@ -57,7 +57,7 @@
       </div>
     </div>
 
-    <div class="col-7">
+    <div class="col-6">
       <div id="map"></div>
     </div>
   </div>
