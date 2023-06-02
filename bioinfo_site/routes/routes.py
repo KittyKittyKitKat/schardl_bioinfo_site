@@ -3,20 +3,22 @@ import csv
 import json
 from pathlib import Path
 
-from flask import Blueprint, render_template, url_for
+from flask import Blueprint, render_template
 
 routes = Blueprint('routes', __name__)
+
+STATIC_PATH = Path(__file__).parents[1] / 'static'
 
 
 @routes.route('/')
 @routes.route('/home')
 def home():
     slideshow_images = []
-    slideshow_images_path = (
-        Path(__name__.split('.')[0]) / 'static' / 'images' / 'slideshow'
-    )
+    slideshow_images_path = STATIC_PATH / 'images' / 'slideshow'
     for image_file in slideshow_images_path.glob('*'):
-        slideshow_images.append(str(Path(*image_file.parts[1:])))
+        slideshow_images.append(
+            Path('/static') / 'images' / 'slideshow' / image_file.name
+        )
     return render_template('home.html', title='Home', images=slideshow_images)
 
 
@@ -27,14 +29,14 @@ def project_details():
 
 @routes.route('/biographies')
 def biographies():
-    with open(Path(__name__.split('.')[0]) / 'static' / 'biographies.json') as fp:
+    with open(STATIC_PATH / 'biographies.json') as fp:
         bios = json.load(fp)
     return render_template('biographies.html', title='Biographies', bios=bios)
 
 
 @routes.route('/collection-sites')
 def collection_sites():
-    with open(Path(__name__.split('.')[0]) / 'static' / 'collection_sites.csv', newline='') as fp:
+    with open(STATIC_PATH / 'collection_sites.csv', newline='') as fp:
         reader = csv.DictReader(fp)
         fieldnames = reader.fieldnames
         markers = []
@@ -44,7 +46,12 @@ def collection_sites():
                 for key, value in row.items()
             }
             markers.append(new_row)
-    return render_template('map.html', title='Collection Sites', markers=markers, fieldnames=fieldnames)
+    return render_template(
+        'map.html',
+        title='Collection Sites',
+        markers=markers,
+        fieldnames=fieldnames,
+    )
 
 
 @routes.route('/gbrowse')
