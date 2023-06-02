@@ -1,0 +1,2 @@
+Run the debugging development server with the command `python -m flask run --debug`.
+Run the plain development server with the command `python  -m flask run`
