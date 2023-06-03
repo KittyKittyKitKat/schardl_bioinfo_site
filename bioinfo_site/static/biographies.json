@@ -31,8 +31,8 @@
         "info": {
             "Institutional Affiliation": "University of Kentucky",
             "Role in Institution": "Faculty in the Department of Computer Science",
-            "Contributions to Project": "",
-            "Hobby Outside of Research": ""
+            "Contributions to Project": "Principal Investigator, Computer Science expertise",
+            "Hobby Outside of Research": "Hiking"
         }
     },
     {
@@ -90,9 +90,9 @@
         "link": "https://www.cs.uky.edu/~acta225/",
         "info": {
             "Institutional Affiliation": "University of Kentucky, Department of Computer Science",
-            "Role in Institution": "Principal Investigators, Computer Science expertise",
+            "Role in Institution": "PhD Student, Research Assistant",
             "Contributions to Project": "Data Wrangling, Software Development",
-            "Hobby Outside of Research": "Hiking"
+            "Hobby Outside of Research": "Programming, violin, piano"
         }
     },
     {
@@ -127,7 +127,7 @@
         "info": {
             "Institutional Affiliation": "University of Kentucky, Department of Computer Science",
             "Role in Institution": "Undergraduate Computer Science and Mathematical Sciences Student",
-            "Contributions to Project": "Website Development, Site Administrator",
+            "Contributions to Project": "Website Development",
             "Hobby Outside of Research": "Programming, piano, and accordion"
         }
     },
