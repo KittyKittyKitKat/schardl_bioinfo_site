@@ -3,3 +3,4 @@ graft bioinfo_site/templates
 global-exclude *.py[cod]
 prune .vscode
 prune .mypy_cache
+prune .github
