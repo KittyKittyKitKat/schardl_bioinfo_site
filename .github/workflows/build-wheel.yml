@@ -1,4 +1,4 @@
-name: Python package
+name: Build Wheel
 
 on:
   push:
@@ -25,3 +25,8 @@ jobs:
     - name: Build wheel
       run: |
         python -m build --wheel
+    - name: Make artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: schardl-site-wheel
+        path: dist/*.whl
