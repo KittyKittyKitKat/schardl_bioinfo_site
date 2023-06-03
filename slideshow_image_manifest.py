@@ -1,11 +1,11 @@
 # Copyright (c) 2023 Nyx Harris-Palmer, Tharanie Subramaniam
-
-from pathlib import Path
 import json
+from pathlib import Path
+
 
 def build_manifest():
     static_path = Path('bioinfo_site') / 'static'
-    images_path = static_path  / 'images' / 'slideshow'
+    images_path = static_path / 'images' / 'slideshow'
 
     image_names = []
 
@@ -14,5 +14,6 @@ def build_manifest():
 
     with open(static_path / 'slideshow_manifest.json', 'w') as fp:
         json.dump(image_names, fp)
+
 
 build_manifest()
