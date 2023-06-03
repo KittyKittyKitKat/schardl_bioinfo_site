@@ -13,12 +13,8 @@ STATIC_PATH = Path(__file__).parents[1] / 'static'
 @routes.route('/')
 @routes.route('/home')
 def home():
-    slideshow_images = []
-    slideshow_images_path = STATIC_PATH / 'images' / 'slideshow'
-    for image_file in slideshow_images_path.glob('*'):
-        slideshow_images.append(
-            Path('/static') / 'images' / 'slideshow' / image_file.name
-        )
+    with open(STATIC_PATH / 'slideshow_manifest.json') as fp:
+        slideshow_images = json.load(fp)
     return render_template('home.html', title='Home', images=slideshow_images)
 
 
