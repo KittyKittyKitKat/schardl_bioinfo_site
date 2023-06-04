@@ -11,9 +11,13 @@ routes = Blueprint('routes', __name__)
 @routes.route('/')
 @routes.route('/home')
 def home():
-    with open(Path(current_app.static_folder) / 'slideshow_manifest.json') as fp:
-        slideshow_images = json.load(fp)
-    return render_template('home.html', title='Home', images=slideshow_images)
+    images_path = Path(current_app.static_folder) / 'images' / 'slideshow'
+
+    image_names = []
+    for image_file in images_path.glob('*'):
+        image_names.append(image_file.name)
+
+    return render_template('home.html', title='Home', images=image_names)
 
 
 @routes.route('/project-details')
