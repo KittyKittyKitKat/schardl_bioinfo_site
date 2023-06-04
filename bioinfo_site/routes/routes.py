@@ -35,7 +35,8 @@ def biographies():
 @routes.route('/collection-sites')
 def collection_sites():
     with open(
-        Path(current_app.static_folder) / 'collection_sites.csv', newline=''
+        Path(current_app.static_folder) / 'collection_sites.csv',
+        newline='',
     ) as fp:
         reader = csv.DictReader(fp)
         fieldnames = reader.fieldnames

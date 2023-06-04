@@ -24,7 +24,7 @@
         <div class="d-flex flex-row align-items-center">
           <img
             class="card-img-top avatar avatar-128 rounded-circle ms-4"
-            src="{{ url_for('static', filename='images/bios/'+person['image_name']) if person['image_name'] else 'https://bulma.io/images/placeholders/128x128.png' }}"
+            src="{{ url_for('static', filename='images/bios/' ~ (person['image_name'] if person['image_name'] else 'DEFAULT.jpg')) }}"
             alt="{{ person['short_name'] }}"
           >
           <h5 class="card-title ms-4">{{ person['long_name'] }}</h5>
