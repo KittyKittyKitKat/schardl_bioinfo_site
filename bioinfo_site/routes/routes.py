@@ -3,17 +3,15 @@ import csv
 import json
 from pathlib import Path
 
-from flask import Blueprint, render_template
+from flask import Blueprint, current_app, render_template
 
 routes = Blueprint('routes', __name__)
-
-STATIC_PATH = Path(__file__).parents[1] / 'static'
 
 
 @routes.route('/')
 @routes.route('/home')
 def home():
-    with open(STATIC_PATH / 'slideshow_manifest.json') as fp:
+    with open(Path(current_app.static_folder) / 'slideshow_manifest.json') as fp:
         slideshow_images = json.load(fp)
     return render_template('home.html', title='Home', images=slideshow_images)
 
@@ -25,14 +23,16 @@ def project_details():
 
 @routes.route('/biographies')
 def biographies():
-    with open(STATIC_PATH / 'biographies.json') as fp:
+    with open(Path(current_app.static_folder) / 'biographies.json') as fp:
         bios = json.load(fp)
     return render_template('biographies.html', title='Biographies', bios=bios)
 
 
 @routes.route('/collection-sites')
 def collection_sites():
-    with open(STATIC_PATH / 'collection_sites.csv', newline='') as fp:
+    with open(
+        Path(current_app.static_folder) / 'collection_sites.csv', newline=''
+    ) as fp:
         reader = csv.DictReader(fp)
         fieldnames = reader.fieldnames
         markers = []
@@ -43,7 +43,7 @@ def collection_sites():
             }
             markers.append(new_row)
     return render_template(
-        'map.html',
+        'collection_sites.html',
         title='Collection Sites',
         markers=markers,
         fieldnames=fieldnames,
