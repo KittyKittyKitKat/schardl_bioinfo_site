@@ -1,11 +1,12 @@
 {# Copyright (c) 2023 Nyx Harris-Palmer, Tharanie Subramaniam #}
 {% extends "layout.html" %}
 {% block extra_head %}
-<link
-  href="{{ url_for('static', filename='css/avatar.min.css') }}"
-  rel="stylesheet"
->
-{% endbock extra_head %}
+<style>
+  .bio-img {
+    width: 128px;
+  }
+</style>
+{% endblock extra_head %}
 {% block content %}
 <div class="container-fluid">
   <div class="row">
@@ -29,7 +30,7 @@
       <div id="card-{{ loop.index0 }}" class="card p-3 m-3">
         <div class="d-flex flex-row align-items-center">
           <img
-            class="card-img-top avatar avatar-128 rounded-circle ms-4"
+            class="card-img-top rounded-circle ms-4 bio-img"
             src="{{ url_for('static', filename='images/bios/' ~ (person['image_name'] if person['image_name'] else 'DEFAULT.jpg')) }}"
             alt="{{ person['short_name'] }}"
           >
