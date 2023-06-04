@@ -14,10 +14,6 @@
       href="{{ url_for('static', filename='css/bootstrap.min.css') }}"
       rel="stylesheet"
     >
-    <link
-      href="{{ url_for('static', filename='css/avatar.min.css') }}"
-      rel="stylesheet"
-    >
     {% block extra_head %}{% endblock %}
   </head>
   <body>
@@ -39,7 +35,6 @@
 
         <div class="collapse navbar-collapse" id="siteNav">
           <div class="navbar-nav">
-            {# TODO: aria-current="page" on current page #}
             <a class="nav-link" href="{{ url_for('routes.home') }}">Home</a>
             <a class="nav-link" href="{{ url_for('routes.project_details') }}">Project Details</a>
             <a class="nav-link" href="{{ url_for('routes.biographies') }}">Biographies</a>

@@ -1,5 +1,11 @@
 {# Copyright (c) 2023 Nyx Harris-Palmer, Tharanie Subramaniam #}
 {% extends "layout.html" %}
+{% block extra_head %}
+<link
+  href="{{ url_for('static', filename='css/avatar.min.css') }}"
+  rel="stylesheet"
+>
+{% endbock extra_head %}
 {% block content %}
 <div class="container-fluid">
   <div class="row">
