@@ -3,7 +3,7 @@ import csv
 import json
 from pathlib import Path
 
-from flask import Blueprint, current_app, render_template
+from flask import Blueprint, current_app, render_template, request
 
 routes = Blueprint('routes', __name__)
 
@@ -34,8 +34,17 @@ def biographies():
 
 @routes.route('/collection-sites')
 def collection_sites():
+    view = request.args.get('view')
+    view = view if view in ('collection', 'plants') else 'collection'
+
+    if view == 'collection':
+        file = 'collection_sites.csv'
+
+    elif view == 'plants':
+        file = 'plant_sites.csv'
+
     with open(
-        Path(current_app.static_folder) / 'collection_sites.csv',
+        Path(current_app.static_folder) / file,
         newline='',
     ) as fp:
         reader = csv.DictReader(fp)
@@ -47,11 +56,13 @@ def collection_sites():
                 for key, value in row.items()
             }
             markers.append(new_row)
+
     return render_template(
         'collection_sites.html',
         title='Collection Sites',
         markers=markers,
         fieldnames=fieldnames,
+        view=view,
     )
 
 

@@ -19,6 +19,10 @@
     border: 1px solid black;
     border-radius: 5px;
   }
+
+  img.huechange {
+    filter: hue-rotate(150deg);
+  }
 </style>
 {% endblock extra_head %}
 {% block content %}
@@ -31,7 +35,25 @@
     <div class="col-md-6">
       <div id="marker-table" class="table-responsive">
         <table class="table table-bordered caption-top table-hover">
-          <caption>List of collection sites</caption>
+          {% if view == 'plants' %}
+            <caption>
+              List of plant sites.
+              View
+              <a
+                href="#"
+                onclick="window.location.replace('{{ url_for('routes.collection_sites', view='collection') }}');"
+              >collection sites</a>.
+            </caption>
+          {% else %}
+            <caption>
+              List of collection sites.
+              View
+              <a
+                href="#"
+                onclick="window.location.replace('{{ url_for('routes.collection_sites', view='plants') }}');"
+              >plant sites</a>.
+            </caption>
+          {% endif %}
           <thead>
             <tr>
               {% for fieldname in fieldnames %}
@@ -104,22 +126,24 @@
 
   Esri_WorldImagery.addTo(map);
 
-  let markers = {{ markers|tojson }} // Array of Objects
+  let markers = {{ markers|tojson }}; // Array of Objects
+  let zoom_level = {{16 if view == 'plants' else 12}};
 
   let markers_arr = [];
   markers.forEach(function (item, index) {
     let marker = L.marker([item.Latitude, item.Longitude]).addTo(map);
+    {{ 'marker._icon.classList.add("huechange");' | safe if view == 'plants' else '' }}
     marker.bindPopup(
       `${item.Site} (${item.Abbreviation})<br>${item.County} County, ${item.State}<br>(${item.Latitude}, ${item.Longitude})`
     );
-    marker.on('click', () => map.flyTo(marker.getLatLng(), 10));
+    marker.on('click', () => map.flyTo(marker.getLatLng(), zoom_level));
     markers_arr.push(marker);
   });
 
   function viewMapMarker(lat, long) {
     let ll = L.latLng(lat, long)
     map.closePopup();
-    map.flyTo(ll, 10);
+    map.flyTo(ll, zoom_level);
     for (let i in markers_arr) {
       if (markers_arr[i].getLatLng().equals(ll)) {
         markers_arr[i].openPopup();
