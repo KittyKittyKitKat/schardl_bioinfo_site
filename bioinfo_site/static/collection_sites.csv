@@ -1,29 +1,29 @@
-Abbreviation,Site,County,State,Latitude,Longitude
-BCFEP,Berea College Forest East Pinnacle,Madison,KY,37.557787,-84.229122
-BCFIF,Berea College Forest Indian Fort trail,Madison,KY,37.558886,-84.235367
-BFJYL,Bernheim Forest Jackson Yoe Loop,Bullitt,KY,37.902875,-85.64048
-BFPFL,Bernheim Forest Poplar Flat,Bullitt,KY,37.912842,-85.652358
-CCWMA,Cane Creek WMA,Laurel,KY,37.048431,-84.288305
-CKWMA,Central Kentucky WMA,Madison,KY,37.60803,-84.194642
-CUGA1,Cumberland Gap Wilderness Trail 1,Bell,KY,36.60882,-83.67805
-CUGA2,Cumberland Gap Wilderness Trail 2,Bell,KY,36.60873,-83.67802
-CUGA3,Cumberland Gap Tristate Lookout,Bell,KY,36.60604,-83.66737
-FLCL1,Floracliff Nature Sactuary 1,Fayette,KY,37.902470,-84.361808
-FLCL2,Floracliff Nature Sactuary 2,Fayette,KY,37.901187,-84.361030
-LCW92,Lilley Cornett Woods Site 92,Letcher,KY,37.078656,-83.002594
-LHNPN,Laura Hare North,Brown,IN,39.17334,-86.14429
-LHNPS,Laura Hare South,Brown,IN,39.17108,-86.14413
-MACAC,Mammoth Cave Campground,Edmonson,KY,37.183701,-86.099686
-MACAE,Mammoth Cave Echo River Trail,Edmonson,KY,37.178645,-86.108319
-MACAM,Mammoth Cave Mill Branch Trail,Edmonson,KY,37.208842,-86.133408
-MACAW,Mammoth Cave Wet Prong Trail,Edmonson,KY,37.243345,-86.190737
-MAYWN,Maywoods-North,Garrard,KY,37.48411,-84.43473
-MAYWT,Maywoods-Top,Rockcastle,KY,37.482660,-84.427309
-RFRCT,Robinson Forest Site 3 cell tower (perithecia),Breathitt,KY,37.4725,-83.160553
-RFRWR,Robinson Forest Site 5 old woodroad,Breathitt,KY,37.468612,-83.135278
-RRGSC,Red River Gorge Swift Camp Creek Trail,Wolfe,KY,37.803913,-83.586922
-RRGW1,Red River Gorge Whittleton Branch Trail 1,Powell,KY,37.785313,-83.665630
-RRGW2,Red River Gorge Whittleton Branch Trail 2,Powell,KY,37.786012,-83.663741
-RRGW3,Red River Gorge Whittleton Branch Trail 3,Powell,KY,37.786009,-83.663769
-TDJBR,Palisades Tom Dorman Trail nr Jesse Brim Rd.,Garrard,KY,37.767378,-84.629212
-TDR27,Palisades Tom Dorman Trail nr Rt.27,Garrard,KY,37.766338,-84.619133
+Abbreviation,Site,County,State,Latitude,Longitude,Ecoregion (Level III),Ecoregion (Level IV)
+BCFEP,Berea College Forest East Pinnacle,Madison,KY,37.557787,-84.229122,Western Allegheny Plateau (70),Knobs-Lower Scioto Dissected Plateau (70d)
+BCFIF,Berea College Forest Indian Fort trail,Madison,KY,37.558886,-84.235367,Western Allegheny Plateau (70),Knobs-Lower Scioto Dissected Plateau (70d)
+BFJYL,Bernheim Forest Jackson Yoe Loop,Bullitt,KY,37.902875,-85.64048,Interior Plateau (71),Knobs-Norman Upland (71c)
+BFPFL,Bernheim Forest Poplar Flat,Bullitt,KY,37.912842,-85.652358,Interior Plateau (71),Knobs-Norman Upland (71c)
+CCWMA,Cane Creek WMA,Laurel,KY,37.048431,-84.288305,Southwestern Appalachians (68),Plateau Escarpment (68c)
+CKWMA,Central Kentucky WMA,Madison,KY,37.60803,-84.194642,Interior Plateau (71),Outer Bluegrass (71d)
+CUGA1,Cumberland Gap Wilderness Trail 1,Bell,KY,36.60882,-83.67805,Central Appalachians (69),Cumberland Mountain Thrust Block (69e)
+CUGA2,Cumberland Gap Wilderness Trail 2,Bell,KY,36.60873,-83.67802,Central Appalachians (69),Cumberland Mountain Thrust Block (69e)
+CUGA3,Cumberland Gap Tristate Lookout,Bell,KY,36.60604,-83.66737,Central Appalachians (69),Cumberland Mountain Thrust Block (69e)
+FLCL1,Floracliff Nature Sactuary 1,Fayette,KY,37.902470,-84.361808,Interior Plateau (71),Inner Bluegrass (71l)
+FLCL2,Floracliff Nature Sactuary 2,Fayette,KY,37.901187,-84.361030,Interior Plateau (71),Inner Bluegrass (71l)
+LCW92,Lilley Cornett Woods Site 92,Letcher,KY,37.078656,-83.002594,Appalachian Plateau (69),Dissected Appalachian Plateau (69d)
+LHNPN,Laura Hare North,Brown,IN,39.17334,-86.14429,Interior Plateau (71),Knobs-Norman Upland (71c)
+LHNPS,Laura Hare South,Brown,IN,39.17108,-86.14413,Interior Plateau (71),Knobs-Norman Upland (71c)
+MACAC,Mammoth Cave Campground,Edmonson,KY,37.183701,-86.099686,Interior Plateau (71),Crawford-Mammoth Cave Uplands (71a)
+MACAE,Mammoth Cave Echo River Trail,Edmonson,KY,37.178645,-86.108319,Interior Plateau (71),Crawford-Mammoth Cave Uplands (71a)
+MACAM,Mammoth Cave Mill Branch Trail,Edmonson,KY,37.208842,-86.133408,Interior River Valleys and Hills (72),Caseyville Hills (72h)
+MACAW,Mammoth Cave Wet Prong Trail,Edmonson,KY,37.243345,-86.190737,Interior River Valleys and Hills (72),Caseyville Hills (72h)
+MAYWN,Maywoods-North,Garrard,KY,37.48411,-84.43473,Interior Plateau (71),Knobs-Norman Upland (71c)
+MAYWT,Maywoods-Top,Rockcastle,KY,37.482660,-84.427309,Interior Plateau (71),Knobs-Norman Upland (71c)
+RFRCT,Robinson Forest Site 3 cell tower (perithecia),Breathitt,KY,37.4725,-83.160553,Appalachian Plateau (69),Dissected Appalachian Plateau (69d)
+RFRWR,Robinson Forest Site 5 old woodroad,Breathitt,KY,37.468612,-83.135278,Appalachian Plateau (69),Dissected Appalachian Plateau (69d)
+RRGSC,Red River Gorge Swift Camp Creek Trail,Wolfe,KY,37.803913,-83.586922,Western Allegheny Plateau (70),Northern Forested Plateau Escarpment (70g)
+RRGW1,Red River Gorge Whittleton Branch Trail 1,Powell,KY,37.785313,-83.665630,Western Allegheny Plateau (70),Northern Forested Plateau Escarpment (70g)
+RRGW2,Red River Gorge Whittleton Branch Trail 2,Powell,KY,37.786012,-83.663741,Western Allegheny Plateau (70),Northern Forested Plateau Escarpment (70g)
+RRGW3,Red River Gorge Whittleton Branch Trail 3,Powell,KY,37.786009,-83.663769,Western Allegheny Plateau (70),Northern Forested Plateau Escarpment (70g)
+TDJBR,Palisades Tom Dorman Trail nr Jesse Brim Rd.,Garrard,KY,37.767378,-84.629212,Interior Plateau (71),Inner Bluegrass (71l)
+TDR27,Palisades Tom Dorman Trail nr Rt.27,Garrard,KY,37.766338,-84.619133,Interior Plateau (71),Inner Bluegrass (71l)
