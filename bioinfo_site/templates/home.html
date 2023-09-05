@@ -1,9 +1,22 @@
 {# Copyright (c) 2023 Nyx Harris-Palmer, Tharanie Subramaniam #}
 {% extends "layout.html" %}
 {% block content %}
-<div class="container">
-  <div class="row g-0 justify-content-center">
-    <div class="col">
+<div class="container-fluid p-3">
+  <div class="row">
+    <div class="col-12">
+      <h3 class="text-center">
+        Dimensions US-China: Collaborative Research:
+        <br>
+        Impacts of heritable plant-fungus symbiosis on phylogenetic, genetic and functional diversity.
+      </h3>
+      <h4 class="text-center">
+        Sponsored by the National Science Foundation Division of Environmental Biology
+      </h4>
+    </div>
+  </div>
+  <hr class="border border-dark">
+  <div class="row">
+    <div class="col-7">
       <div id="home-slideshow" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
           {% for i in range(images|length) %}
@@ -56,6 +69,11 @@
           <span class="visually-hidden">Next</span>
         </button>
       </div>
+    </div>
+    <div class="col-5">
+      <p class="fs-5">
+        This group and project seek to research a fungus that was shown to donate a disease resistance gene to a wild relative of wheat. This study employs cutting-edge methods in ecology, genomics and other biological sciences to research the diversity of plants and their seed-borne fungal partners in the U.S. and in China, a global hotspot for plant diversity. Results will guide efforts to preserve biological diversity and promote healthy, resilient and productive natural ecosystems, rangelands and pastures. Outputs to the public and the scientific community will enhance knowledge of plant-microbe symbiosis as a key dimension of diversity. The research and educational exchange activities strengthen and diversify scientific collaboration between scientists and students in China and the U.S., provide training to graduate students and postdocs in a broad range of biological and bioinformatic sciences, and integrate field, classroom, and lab activities for K-12 and undergraduate students to discover microscopic and macroscopic layers of biological complexity.
+      </p>
     </div>
   </div>
 </div>
