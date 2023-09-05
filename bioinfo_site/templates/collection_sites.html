@@ -124,6 +124,14 @@
     attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
   });
 
+  var Esri_NatGeoWorldMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC'
+  });
+
+  var Esri_WorldGrayCanvas = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ'
+  });
+
   let marker_layer = L.layerGroup();
   let markers = {{ markers|tojson }}; // Array of Objects
   let zoom_level = {{16 if view == 'plants' else 12}};
@@ -180,14 +188,14 @@
       "Topography": Esri_WorldTopoMap,
       "Satellite": Esri_WorldImagery,
       "Streets": Esri_WorldStreetMap,
+      "National Geographic": Esri_NatGeoWorldMap,
+      "Grey World": Esri_WorldGrayCanvas,
     },
   ).addTo(map);
   layerControl.addOverlay(marker_layer, "Site Markers");
   layerControl.addOverlay(gj_layer, "Kentucky Ecoregions");
 
   Esri_WorldTopoMap.addTo(map);
-
-
 
   function viewMapMarker(lat, long) {
     let ll = L.latLng(lat, long)
