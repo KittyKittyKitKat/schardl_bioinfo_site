@@ -129,8 +129,9 @@ https://wiki.openstreetmap.org/wiki/Map_features
   });
 
   let ecoregions_geojson = {{ ecoregions_data|tojson }}; // GeoJSON, Object
-  let gj_layer = L.geoJSON().addTo(map);
-  gj_layer.addData(ecoregions_geojson);
+  let gj_layer = L.geoJSON(ecoregions_geojson, {
+    attribution: 'Ecoregions courtesy of Ian Horn via KyGovMaps Open Data Portal and the OpenGIS Project',
+  }).addTo(map);
 
   let layerControl = L.control.layers(
     {
