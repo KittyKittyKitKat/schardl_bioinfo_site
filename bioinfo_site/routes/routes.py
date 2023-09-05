@@ -32,6 +32,10 @@ def biographies():
     return render_template('biographies.html', title='Biographies', bios=bios)
 
 
+@routes.route('/ecoregions')
+def ecoregions():
+    return render_template('ecoregions.html', title='Ecoregions')
+
 @routes.route('/collection-sites')
 def collection_sites():
     view = request.args.get('view')
