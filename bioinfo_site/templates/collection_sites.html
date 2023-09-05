@@ -1,16 +1,4 @@
 {# Copyright (c) 2023 Nyx Harris-Palmer, Tharanie Subramaniam #}
-{# TODO: switch table for accordion layout #}
-{# TODO: topo view default #}
-{# TODO: eco regions data to each row #}
-{# indiana region 71c #}
-{#
-the main site has a few links, but I would recommend looking for more on OpenStreetMap in searches. I attach a link to the tagged features page on the wiki, it may be possible to recreate this or use created layers to define collection sites, ecoregions, etc.
-https://www.openstreetmap.org/#map=10/38.0259/-84.6023
-
-https://wiki.openstreetmap.org/wiki/Map_features
-
-#}
-{# https://opengisdata.ky.gov/datasets/kygeonet::ky-level-iv-ecoregions/about look for citing #}
 {% extends "layout.html" %}
 {% block extra_head %}
 <link
@@ -45,53 +33,61 @@ https://wiki.openstreetmap.org/wiki/Map_features
     </div>
 
     <div class="col-md-6">
-      <div id="marker-table" class="table-responsive">
-        <table class="table table-bordered caption-top table-hover">
-          {% if view == 'plants' %}
-            <caption>
-              List of plant sites.
-              View
-              <a
-                href="#"
-                onclick="window.location.replace('{{ url_for('routes.collection_sites', view='collection') }}');"
-              >collection sites</a>.
-            </caption>
-          {% else %}
-            <caption>
-              List of collection sites.
-              View
-              <a
-                href="#"
-                onclick="window.location.replace('{{ url_for('routes.collection_sites', view='plants') }}');"
-              >plant sites</a>.
-            </caption>
-          {% endif %}
-          <thead>
-            <tr>
-              {% for fieldname in fieldnames %}
-              <th scope="col" class="text-center">{{ fieldname }}</th>
-              {% endfor %}
-            </tr>
-          </thead>
-          <tbody>
-          {% for row in markers %}
-            <tr>
-            {% for key, value in row.items() %}
-              <td>{{value}}</td>
-            {% endfor %}
-            <td>
+      <div class="accordion accordion-flush overflow-y-scroll" id="marker-region">
+        {% if view == 'plants' %}
+        <p>
+          List of plant sites.
+          View
+          <a
+            href="#"
+            onclick="window.location.replace('{{ url_for('routes.collection_sites', view='collection') }}');"
+          >collection sites</a>.
+        </p>
+        {% else %}
+          <p>
+          List of collection sites.
+          View
+          <a
+            href="#"
+            onclick="window.location.replace('{{ url_for('routes.collection_sites', view='plants') }}');"
+          >plant sites</a>.
+          </p>
+        {% endif %}
+        {% for data_row in markers %}
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}" aria-expanded="false" aria-controls="collapse{{ loop.index }}">
+              {{ data_row['Site'] }} ({{ data_row['Abbreviation'] }})
+            </button>
+          </h2>
+          <div id="collapse{{ loop.index }}" class="accordion-collapse collapse">
+            <div class="accordion-body">
+              <p>Information:</p>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  {{ data_row['County'] }}, {{ data_row['State'] }}
+                </li>
+                <li class="list-group-item">
+                  Ecoregion (Level III): {{ data_row['Ecoregion (Level III)'] }}
+                </li>
+                <li class="list-group-item">
+                  Ecoregion (Level IV): {{ data_row['Ecoregion (Level IV)'] }}
+                </li>
+                <li class="list-group-item">
+                  Location: {{ data_row['Latitude'] }}&deg;N, {{ data_row['Longitude'] }}&deg;E
+                </li>
+              </ul>
               <button
                 type="button"
-                class="btn btn-secondary btn-sm"
-                onclick="viewMapMarker({{ row['Latitude'] }}, {{ row['Longitude'] }})"
+                class="btn btn-secondary btn-sm mt-3"
+                onclick="viewMapMarker({{ data_row['Latitude'] }}, {{ data_row['Longitude'] }})"
               >
                 View on map
               </button>
-            </td>
-            </tr>
-          {% endfor %}
-          </tbody>
-        </table>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
       </div>
     </div>
   </div>
@@ -104,7 +100,7 @@ https://wiki.openstreetmap.org/wiki/Map_features
       document.querySelector("#map").style.height = (
         window_height-nav_height-15
       ) + 'px';
-      document.querySelector("#marker-table").style.height = (
+      document.querySelector("#marker-region").style.height = (
         window_height-nav_height-15
       ) + 'px';
   }
@@ -135,8 +131,8 @@ https://wiki.openstreetmap.org/wiki/Map_features
 
   let layerControl = L.control.layers(
     {
-      "Satellite": Esri_WorldImagery,
       "Topography": Esri_WorldTopoMap,
+      "Satellite": Esri_WorldImagery,
       "Streets": Esri_WorldStreetMap,
     },
   ).addTo(map);
@@ -152,7 +148,7 @@ https://wiki.openstreetmap.org/wiki/Map_features
     let marker = L.marker([item.Latitude, item.Longitude]).addTo(map);
     {{ 'marker._icon.classList.add("huechange");' | safe if view == 'plants' else '' }}
     marker.bindPopup(
-      `${item.Site} (${item.Abbreviation})<br>${item.County} County, ${item.State}<br>(${item.Latitude}, ${item.Longitude})`
+      `${item.Site} (${item.Abbreviation})<br>${item.County} County, ${item.State}<br>(${item.Latitude}, ${item.Longitude})<br>Ecoregion (Level III): ${item['Ecoregion (Level III)']}<br>Ecoregion (Level IV): ${item['Ecoregion (Level IV)']}`
     );
     marker.on('click', () => map.flyTo(marker.getLatLng(), zoom_level));
     markers_arr.push(marker);
