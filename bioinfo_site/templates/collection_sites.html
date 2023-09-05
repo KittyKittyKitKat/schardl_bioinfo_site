@@ -124,9 +124,55 @@
     attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
   });
 
+  let marker_layer = L.layerGroup();
+  let markers = {{ markers|tojson }}; // Array of Objects
+  let zoom_level = {{16 if view == 'plants' else 12}};
+
+  let markers_arr = [];
+  markers.forEach(function (item, index) {
+    let marker = L.marker([item.Latitude, item.Longitude]).addTo(marker_layer);
+    {{ 'marker._icon.classList.add("huechange");' | safe if view == 'plants' else '' }}
+    marker.bindPopup(
+      `${item.Site} (${item.Abbreviation})<br>${item.County} County, ${item.State}<br>(${item.Latitude}, ${item.Longitude})<br>Ecoregion (Level III): ${item['Ecoregion (Level III)']}<br>Ecoregion (Level IV): ${item['Ecoregion (Level IV)']}`
+    );
+    marker.on('click', () => map.flyTo(marker.getLatLng(), zoom_level));
+    markers_arr.push(marker);
+  });
+  marker_layer.addTo(map);
+
   let ecoregions_geojson = {{ ecoregions_data|tojson }}; // GeoJSON, Object
   let gj_layer = L.geoJSON(ecoregions_geojson, {
     attribution: 'Ecoregions courtesy of Ian Horn via KyGovMaps Open Data Portal and the OpenGIS Project',
+    style: (feature) => {
+      switch(feature.properties.US_L4CODE) {
+        case '68a': return {color: '#d9f0b5', 'fillOpacity': 0.7};
+        case '68c': return {color: '#c1dd8c', 'fillOpacity': 0.7};
+        case '69d': return {color: '#b0d67a', 'fillOpacity': 0.7};
+        case '69e': return {color: '#9ecb71', 'fillOpacity': 0.7};
+        case '70b': return {color: '#f3f7ae', 'fillOpacity': 0.7};
+        case '70d': return {color: '#e6f183', 'fillOpacity': 0.7};
+        case '70f': return {color: '#f3f8c5', 'fillOpacity': 0.7};
+        case '70g': return {color: '#cee757', 'fillOpacity': 0.7};
+        case '70h': return {color: '#ebf6bb', 'fillOpacity': 0.7};
+        case '71a': return {color: '#f3bb4f', 'fillOpacity': 0.7};
+        case '71b': return {color: '#fdde9e', 'fillOpacity': 0.7};
+        case '71c': return {color: '#fee6b4', 'fillOpacity': 0.7};
+        case '71d': return {color: '#feeec2', 'fillOpacity': 0.7};
+        case '71e': return {color: '#fddb82', 'fillOpacity': 0.7};
+        case '71f': return {color: '#f4d180', 'fillOpacity': 0.7};
+        case '71g': return {color: '#fcc961', 'fillOpacity': 0.7};
+        case '71h': return {color: '#feeaa1', 'fillOpacity': 0.7};
+        case '71k': return {color: '#f2c573', 'fillOpacity': 0.7};
+        case '71l': return {color: '#fccb4d', 'fillOpacity': 0.7};
+        case '72a': return {color: '#d5d57e', 'fillOpacity': 0.7};
+        case '72c': return {color: '#ccc68a', 'fillOpacity': 0.7};
+        case '72h': return {color: '#cece92', 'fillOpacity': 0.7};
+        case '73a': return {color: '#eed5ed', 'fillOpacity': 0.7};
+        case '74a': return {color: '#f89b6a', 'fillOpacity': 0.7};
+        case '74b': return {color: '#fab78a', 'fillOpacity': 0.7};
+
+      }
+    }
   }).addTo(map);
 
   let layerControl = L.control.layers(
@@ -136,23 +182,12 @@
       "Streets": Esri_WorldStreetMap,
     },
   ).addTo(map);
+  layerControl.addOverlay(marker_layer, "Site Markers");
   layerControl.addOverlay(gj_layer, "Kentucky Ecoregions");
 
   Esri_WorldTopoMap.addTo(map);
 
-  let markers = {{ markers|tojson }}; // Array of Objects
-  let zoom_level = {{16 if view == 'plants' else 12}};
 
-  let markers_arr = [];
-  markers.forEach(function (item, index) {
-    let marker = L.marker([item.Latitude, item.Longitude]).addTo(map);
-    {{ 'marker._icon.classList.add("huechange");' | safe if view == 'plants' else '' }}
-    marker.bindPopup(
-      `${item.Site} (${item.Abbreviation})<br>${item.County} County, ${item.State}<br>(${item.Latitude}, ${item.Longitude})<br>Ecoregion (Level III): ${item['Ecoregion (Level III)']}<br>Ecoregion (Level IV): ${item['Ecoregion (Level IV)']}`
-    );
-    marker.on('click', () => map.flyTo(marker.getLatLng(), zoom_level));
-    markers_arr.push(marker);
-  });
 
   function viewMapMarker(lat, long) {
     let ll = L.latLng(lat, long)
