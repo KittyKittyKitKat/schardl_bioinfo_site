@@ -180,7 +180,10 @@
         case '74b': return {color: '#fab78a', 'fillOpacity': 0.7};
 
       }
-    }
+    },
+    onEachFeature: (feature, layer) => {
+      layer.bindPopup(`Ecoregion Level III: ${feature.properties.US_L3NAME} (${feature.properties.US_L3CODE})<br>Ecoregion Level IV: ${feature.properties.US_L4NAME} (${feature.properties.US_L4CODE})`);
+    },
   }).addTo(map);
 
   let layerControl = L.control.layers(
