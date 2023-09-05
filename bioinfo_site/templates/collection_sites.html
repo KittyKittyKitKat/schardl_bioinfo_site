@@ -1,15 +1,16 @@
 {# Copyright (c) 2023 Nyx Harris-Palmer, Tharanie Subramaniam #}
 {# TODO: switch table for accordion layout #}
 {# TODO: topo view default #}
-{# TODO: eco regions tileset/layer #}
+{# TODO: eco regions data to each row #}
+{# indiana region 71c #}
 {#
-
 the main site has a few links, but I would recommend looking for more on OpenStreetMap in searches. I attach a link to the tagged features page on the wiki, it may be possible to recreate this or use created layers to define collection sites, ecoregions, etc.
 https://www.openstreetmap.org/#map=10/38.0259/-84.6023
 
 https://wiki.openstreetmap.org/wiki/Map_features
 
 #}
+{# https://opengisdata.ky.gov/datasets/kygeonet::ky-level-iv-ecoregions/about look for citing #}
 {% extends "layout.html" %}
 {% block extra_head %}
 <link
@@ -135,7 +136,7 @@ https://wiki.openstreetmap.org/wiki/Map_features
     },
   ).addTo(map);
 
-  Esri_WorldImagery.addTo(map);
+  Esri_WorldTopoMap.addTo(map);
 
   let markers = {{ markers|tojson }}; // Array of Objects
   let zoom_level = {{16 if view == 'plants' else 12}};
