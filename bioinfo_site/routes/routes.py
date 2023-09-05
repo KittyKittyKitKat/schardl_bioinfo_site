@@ -36,6 +36,7 @@ def biographies():
 def ecoregions():
     return render_template('ecoregions.html', title='Ecoregions')
 
+
 @routes.route('/collection-sites')
 def collection_sites():
     view = request.args.get('view')
@@ -65,6 +66,7 @@ def collection_sites():
         'collection_sites.html',
         title='Collection Sites',
         markers=markers,
+        ecoregions_data=current_app.config['ECOREGIONS_DATA'],
         fieldnames=fieldnames,
         view=view,
     )

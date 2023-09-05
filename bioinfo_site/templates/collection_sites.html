@@ -128,6 +128,10 @@ https://wiki.openstreetmap.org/wiki/Map_features
     attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
   });
 
+  let ecoregions_geojson = {{ ecoregions_data|tojson }}; // GeoJSON, Object
+  let gj_layer = L.geoJSON().addTo(map);
+  gj_layer.addData(ecoregions_geojson);
+
   let layerControl = L.control.layers(
     {
       "Satellite": Esri_WorldImagery,
@@ -135,6 +139,7 @@ https://wiki.openstreetmap.org/wiki/Map_features
       "Streets": Esri_WorldStreetMap,
     },
   ).addTo(map);
+  layerControl.addOverlay(gj_layer, "Kentucky Ecoregions");
 
   Esri_WorldTopoMap.addTo(map);
 
