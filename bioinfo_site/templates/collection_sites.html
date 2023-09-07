@@ -35,7 +35,7 @@
     <div class="col-md-6">
       <div class="accordion accordion-flush overflow-y-scroll" id="marker-region">
         {% if view == 'plants' %}
-        <p>
+        <p class="mt-2">
           List of plant sites.
           View
           <a
@@ -44,13 +44,13 @@
           >collection sites</a>.
         </p>
         {% else %}
-          <p>
-          List of collection sites.
-          View
-          <a
-            href="#"
-            onclick="window.location.replace('{{ url_for('routes.collection_sites', view='plants') }}');"
-          >plant sites</a>.
+          <p class="mt-2">
+            List of collection sites.
+            View
+            <a
+              href="#"
+              onclick="window.location.replace('{{ url_for('routes.collection_sites', view='plants') }}');"
+            >plant sites</a>.
           </p>
         {% endif %}
         {% for data_row in markers %}
@@ -139,7 +139,6 @@
   let markers_arr = [];
   markers.forEach(function (item, index) {
     let marker = L.marker([item.Latitude, item.Longitude]).addTo(marker_layer);
-    {{ 'marker._icon.classList.add("huechange");' | safe if view == 'plants' else '' }}
     marker.bindPopup(
       `${item.Site} (${item.Abbreviation})<br>${item.County} County, ${item.State}<br>(${item.Latitude}, ${item.Longitude})<br>Ecoregion (Level III): ${item['Ecoregion (Level III)']}<br>Ecoregion (Level IV): ${item['Ecoregion (Level IV)']}`
     );
@@ -147,6 +146,11 @@
     markers_arr.push(marker);
   });
   marker_layer.addTo(map);
+  {% if view == 'plants' %}
+    marker_layer.eachLayer((layer) => {
+      layer._icon.classList.add("huechange");
+    })
+  {% endif %}
 
   let ecoregions_geojson = {{ ecoregions_data|tojson }}; // GeoJSON, Object
   let gj_layer = L.geoJSON(ecoregions_geojson, {
