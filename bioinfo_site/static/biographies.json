@@ -41,10 +41,10 @@
         "image_name": "",
         "link": "",
         "info": {
-            "Institutional Affiliation": "",
-            "Role in Institution": "",
-            "Contributions to Project": "",
-            "Hobby Outside of Research": ""
+            "Institutional Affiliation": "University of Kentucky, Department of Computer Science",
+            "Role in Institution": "Associate Professor of Computer Science",
+            "Contributions to Project": "Co-principal investigator; bioinformatics",
+            "Hobby Outside of Research": "Board games"
         }
     },
     {
@@ -110,7 +110,7 @@
     {
         "long_name": "Nyx Harris-Palmer",
         "short_name": "N. Harris-Palmer",
-        "image_name": "",
+        "image_name": "harrispalmer.jpeg",
         "link": "",
         "info": {
             "Institutional Affiliation": "University of Kentucky, Department of Computer Science",
