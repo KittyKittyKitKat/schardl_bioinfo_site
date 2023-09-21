@@ -93,18 +93,19 @@
   </div>
 </div>
 <script>
-  function set_map_table_height() {
+  function set_region_height() {
       let window_height = window.innerHeight;
       let nav_height = document.querySelector('#site-navbar').offsetHeight;
+      let precontent_height = document.querySelector('#precontent').offsetHeight;
       document.querySelector("#map").style.height = (
-        window_height-nav_height-15
+        window_height-nav_height-precontent_height-20
       ) + 'px';
       document.querySelector("#marker-region").style.height = (
-        window_height-nav_height-15
+        window_height-nav_height-precontent_height-20
       ) + 'px';
   }
-  set_map_table_height();
-  window.addEventListener('resize', set_map_table_height);
+  set_region_height();
+  window.addEventListener('resize', set_region_height);
 
   let map = L.map('map', {
     "center": [38.047989, -84.501640],
@@ -199,9 +200,14 @@
       "National Geographic": Esri_NatGeoWorldMap,
       "Grey World": Esri_WorldGrayCanvas,
     },
+    {
+      "Site Markers": marker_layer,
+      "Kentucky Ecoregions": gj_layer,
+    },
+    {
+      position: 'topleft'
+    },
   ).addTo(map);
-  layerControl.addOverlay(marker_layer, "Site Markers");
-  layerControl.addOverlay(gj_layer, "Kentucky Ecoregions");
 
   Esri_WorldTopoMap.addTo(map);
   L.control.scale({position: 'topleft'}).addTo(map);

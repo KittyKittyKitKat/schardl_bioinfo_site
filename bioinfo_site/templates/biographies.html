@@ -28,13 +28,18 @@
       >
       {% for person in bios %}
       <div id="card-{{ loop.index0 }}" class="card p-3 m-3">
-        <div class="d-flex flex-row align-items-center">
-          <img
-            class="card-img-top rounded-circle ms-4 bio-img"
-            src="{{ url_for('static', filename='images/bios/' ~ (person['image_name'] if person['image_name'] else 'DEFAULT.jpg')) }}"
-            alt="{{ person['short_name'] }}"
-          >
-          <h5 class="card-title ms-4">{{ person['long_name'] }}</h5>
+        <div class="row">
+          <div class="col-auto">
+            <img
+              class="card-img-top rounded-circle ms-4 bio-img"
+              src="{{ url_for('static', filename='images/bios/' ~ (person['image_name'] if person['image_name'] else 'DEFAULT.jpg')) }}"
+              alt="{{ person['short_name'] }}"
+            >
+          </div>
+          <div class="col mt-4">
+            <h5 class="card-title ms-4">{{ person['long_name'] }}</h5>
+            <h6 class="card-subtitle ms-4 text-body-secondary">{{ person['short_name'] }}</h6>
+          </div>
         </div>
         <div class="card-body">
           <ul class="list-group">
@@ -63,14 +68,15 @@
   </div>
 </div>
 <script>
-  function set_card_region_height() {
+  function set_region_height() {
       let window_height = window.innerHeight;
       let nav_height = document.querySelector('#site-navbar').offsetHeight;
+      let precontent_height = document.querySelector('#precontent').offsetHeight;
       document.querySelector("#bios").style.height = (
-        window_height-nav_height-15
+        window_height-nav_height-precontent_height-20
       ) + 'px';
   }
-  set_card_region_height();
-  window.addEventListener('resize', set_card_region_height);
+  set_region_height();
+  window.addEventListener('resize', set_region_height);
 </script>
 {% endblock content %}
