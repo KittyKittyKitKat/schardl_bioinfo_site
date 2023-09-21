@@ -3,9 +3,31 @@ import csv
 import json
 from pathlib import Path
 
-from flask import Blueprint, current_app, render_template, request
+from flask import Blueprint, current_app, flash, redirect, render_template, request
+from flask_login import login_required, login_user, logout_user
+
+from ..utils.user_model import User, users
 
 routes = Blueprint('routes', __name__)
+
+
+@routes.route('/login', methods=['POST'])
+def login():
+    email = request.form['email']
+    if email in users and request.form['password'] == users[email]['password']:
+        user = User()
+        user.id = email
+        login_user(user)
+        flash('Logged in successfully', category='info')
+    return redirect(request.referrer)
+
+
+@routes.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('Logged out successfully', category='info')
+    return redirect(request.referrer)
 
 
 @routes.route('/')

@@ -2,11 +2,17 @@
 import json
 from pathlib import Path
 
+import flask_login
+from dotenv import dotenv_values
 from flask import Flask
+
+login_manager = flask_login.LoginManager()
 
 
 def create_app():
     app = Flask(__name__)
+    app.secret_key = dotenv_values()['SECRET_KEY']
+    login_manager.init_app(app)
     from bioinfo_site.errors.handlers import errors
     from bioinfo_site.routes.routes import routes
 
