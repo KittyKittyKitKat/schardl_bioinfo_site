@@ -1,9 +1,9 @@
 # Copyright (c) 2023 Nyx Harris-Palmer, Tharanie Subramaniam
 import json
 from pathlib import Path
+from secrets import token_urlsafe
 
 import flask_login
-from dotenv import dotenv_values
 from flask import Flask
 
 login_manager = flask_login.LoginManager()
@@ -11,7 +11,7 @@ login_manager = flask_login.LoginManager()
 
 def create_app():
     app = Flask(__name__)
-    app.secret_key = dotenv_values()['SECRET_KEY']
+    app.secret_key = token_urlsafe(32)
     login_manager.init_app(app)
     from bioinfo_site.errors.handlers import errors
     from bioinfo_site.routes.routes import routes
